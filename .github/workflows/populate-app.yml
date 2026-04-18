@@ -1,0 +1,81 @@
+# .github/workflows/populate-app.yml
+name: Populate Resonance App
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'agents/**'
+      - 'schema/**'
+      - 'src/**'
+  workflow_dispatch:
+    inputs:
+      base_filter:
+        description: 'Filter by base (A/T/C/G/U/all)'
+        required: true
+        default: 'all'
+
+jobs:
+  populate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      # UPDATED: Node 22 instead of deprecated Node 20
+      - name: Setup Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+      
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      
+      # Validate schema first
+      - name: Validate genetic schema
+        run: |
+          node scripts/validate-genetic-schema.js \
+            --schema schema/circuits.yml \
+            --bases A,T,C,G,U
+      
+      # Compile agents by base type
+      - name: Compile ATCGU agents
+        run: |
+          node scripts/compile-agents.js \
+            --src agents/ \
+            --out dist/agents/ \
+            --filter ${{ github.event.inputs.base_filter || 'all' }}
+      
+      # Populate the app database
+      - name: Populate app
+        run: |
+          node scripts/populate-app.js \
+            --agents dist/agents/ \
+            --env production
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RESONANCE_SEED: ${{ secrets.RESONANCE_SEED }}
+      
+      # Verify population
+      - name: Verify genetic integrity
+        run: |
+          node scripts/verify-integrity.js \
+            --check codon-balance \
+            --check base-pairs \
+            --check mesh-formation
+      
+      # Deploy if all checks pass
+      - name: Deploy to field
+        if: success()
+        run: |
+          node scripts/deploy-field.js \
+            --manifest dist/population-manifest.json
+        env:
+          FIELD_ENDPOINT: ${{ secrets.FIELD_ENDPOINT }}
+          DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
