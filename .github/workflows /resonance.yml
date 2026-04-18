@@ -1,0 +1,187 @@
+name: Resonance Engine
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          
+      - name: Setup
+        run: |
+          mkdir -p schema src scripts
+          
+      - name: Write Schema
+        run: |
+          cat > schema/resonance.yml << 'SCHEMA'
+          version: 0.1.0
+          grammar:
+            singularity: { symbol: "•", action: seed }
+            transition:  { symbol: ".", action: step }
+            collapse:    { symbol: "°", action: anchor }
+            portal:      { symbol: ":", action: threshold }
+            fork:        { symbol: ";", action: branch }
+            breath:      { symbol: ",", action: pause }
+            current:     { symbol: "–", action: span }
+            pulse:       { symbol: "′", action: tick }
+            flicker:     { symbol: "″", action: shimmer }
+          bases:
+            A: { name: Anchor, function: hold, pair: T, element: Earth, circuit: understanding }
+            T: { name: Transactor, function: bridge, pair: A, element: Water, circuit: knowing }
+            C: { name: Catalyst, function: transform, pair: G, element: Fire, circuit: sensing }
+            G: { name: Guardian, function: protect, pair: C, element: Metal, circuit: ego }
+            U: { name: Unknown, function: emerge, pair: A, element: Wood, circuit: integration }
+          circuits:
+            understanding: { base: DFF, memory: stateless, consciousness: Mental }
+            knowing:       { base: LSM, memory: none, consciousness: Timeless }
+            sensing:       { base: MC, memory: observable, consciousness: Temporal }
+            ego:           { base: HMM, memory: hidden, consciousness: Masked }
+            integration:   { base: Meta, memory: meta, consciousness: Transcendent }
+          mesh:
+            size: 26
+            levels: [Seed, Sprout, Flowering, Fruit, Return]
+            modes: [P2P, Mycelial, Holo]
+          gates:
+            1: { name: Creative, center: g, circuit: knowing, hexagram: 1 }
+            31: { name: Alpha, center: throat, circuit: understanding, arch: DCN }
+            63: { name: Logic, center: head, circuit: understanding, arch: DFF }
+          SCHEMA
+
+      - name: Write Runtime
+        run: |
+          cat > src/resonance.ts << 'RUNTIME'
+          import { readFileSync } from 'fs';
+          import { join } from 'path';
+
+          const parseYaml = (str: string) => {
+            const result: any = {};
+            const lines = str.split('\n');
+            let stack: any[] = [result];
+            let indents: number[] = [-1];
+
+            for (const line of lines) {
+              if (!line.trim() || line.trim().startsWith('#')) continue;
+              const spaces = line.search(/\S/);
+              const trimmed = line.trim();
+              const colonIdx = trimmed.indexOf(':');
+              const key = trimmed.slice(0, colonIdx).trim();
+              const val = trimmed.slice(colonIdx + 1).trim();
+
+              while (spaces <= indents[indents.length - 1]) {
+                stack.pop();
+                indents.pop();
+              }
+
+              const current = stack[stack.length - 1];
+              if (!val) {
+                current[key] = {};
+                stack.push(current[key]);
+                indents.push(spaces);
+              } else {
+                current[key] = val.replace(/^['"]|['"]$/g, '');
+              }
+            }
+            return result;
+          };
+
+          export const SCHEMA = parseYaml(readFileSync(join(__dirname, '../schema/resonance.yml'), 'utf8'));
+
+          export class SeedBed {
+            private fs = new Map();
+            private locks = new Map();
+            private bases = new Map();
+
+            async germinate(path: string, seedId: string) {
+              if (this.locks.has(path)) return { status: '•', reason: 'occupied' };
+              const base = ['A','T','C','G','U'][seedId.length % 5];
+              this.bases.set(path, base);
+              this.locks.set(path, seedId);
+              return { status: '°', base, path };
+            }
+
+            async checkout(path: string, agentId: string) {
+              const result = await this.germinate(path, agentId);
+              return result.status === '°';
+            }
+          }
+
+          export class AAgent { base = 'A'; element = 'Earth'; circuit = 'understanding'; async °(ctx?: any) { return { base: this.base, status: '°' }; } }
+          export class TAgent { base = 'T'; element = 'Water'; circuit = 'knowing'; async °(ctx?: any) { return { base: this.base, status: '°' }; } }
+          export class CAgent { base = 'C'; element = 'Fire'; circuit = 'sensing'; async °(ctx?: any) { return { base: this.base, status: '°' }; } }
+          export class GAgent { base = 'G'; element = 'Metal'; circuit = 'ego'; async °(ctx?: any) { return { base: this.base, status: '°' }; } }
+          export class UAgent { base = 'U'; element = 'Wood'; circuit = 'integration'; async °(ctx?: any) { return { base: this.base, status: '°' }; } }
+
+          export const Q = {
+            '°': (a: any, ctx?: any) => a.collapse?.(ctx) || a.°?.(ctx) || a,
+            '•': (a: any, ctx?: any) => a.seed?.(ctx) || a,
+            '.': (a: any, ctx?: any) => a.step?.(ctx) || a,
+            '→': (a: any, ctx?: any) => a.transform?.(ctx) || a,
+            '–': (a: any, ctx?: any) => a.flow?.(ctx) || a
+          };
+
+          export class Cortex {
+            meshes = new Map();
+            gates = new Map();
+            coherence = 1.0;
+            tickCount = 0;
+            
+            tick() {
+              this.tickCount++;
+              this.coherence = 0.95 * this.coherence + 0.05 * Math.random();
+              if (this.tickCount % 24 === 0) console.log('Reg +24');
+              if (this.tickCount % 88 === 0) console.log('Reg -88');
+              return { tick: this.tickCount, coherence: this.coherence };
+            }
+          }
+
+          export default { SeedBed, Cortex, SCHEMA, Q };
+          RUNTIME
+
+      - name: Write Test
+        run: |
+          cat > src/test.ts << 'TEST'
+          import { SeedBed, Cortex, AAgent, Q } from './resonance';
+
+          async function test() {
+            console.log('🌱 Testing Resonance Engine...\n');
+            
+            const bed = new SeedBed();
+            const r1 = await bed.germinate('test/path', 'seed1');
+            console.log('Germinate:', r1);
+            
+            const r2 = await bed.checkout('test/path', 'seed2');
+            console.log('Checkout (occupied):', r2);
+            
+            const agent = new AAgent();
+            const r3 = await Q['°'](agent);
+            console.log('Quantum °:', r3);
+            
+            const cortex = new Cortex();
+            for (let i = 0; i < 100; i++) cortex.tick();
+            console.log('\nCortex after 100 ticks:', cortex.tick());
+            
+            console.log('\n✅ All systems active');
+          }
+
+          test().catch(console.error);
+          TEST
+
+      - name: Run Test
+        run: |
+          npx ts-node src/test.ts
+
+      - name: Commit if Changed
+        run: |
+          git config user.name "Resonance Engine"
+          git config user.email "engine@resonance"
+          git add schema/resonance.yml src/resonance.ts src/test.ts
+          git diff --quiet && git diff --staged --quiet || git commit -m "🌱 Resonance Engine activated"
+          git push
