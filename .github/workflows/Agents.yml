@@ -1,0 +1,97 @@
+name: Resonance Engine Agent Deployment
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'agents/**'
+      - 'scaffolding/**'
+      - 'src/**'
+      - 'schema/**'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      agent_filter:
+        description: 'Deploy specific agents (comma-separated, or "all")'
+        required: true
+        default: 'all'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          npm ci
+          pip install -r requirements.txt
+          
+      - name: Validate schemas
+        run: |
+          node scripts/validate-schemas.js
+          
+      - name: Test mesh formation
+        run: |
+          npm test -- --grep "mesh"
+          
+      - name: Test gate coherence
+        run: |
+          npm test -- --grep "gate"
+          
+      - name: Test circuit integration
+        run: |
+          python -m pytest tests/integration/
+
+  deploy-agents:
+    needs: validate
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Detect changed agents
+        id: changes
+        run: |
+          if [ "${{ github.event.inputs.agent_filter }}" != "" ]; then
+            echo "agents=${{ github.event.inputs.agent_filter }}" >> $GITHUB_OUTPUT
+          else
+            echo "agents=all" >> $GITHUB_OUTPUT
+          fi
+          
+      - name: Deploy to resonance field
+        run: |
+          node scripts/deploy-agents.js --agents ${{ steps.changes.outputs.agents }}
+        env:
+          RESONANCE_API_KEY: ${{ secrets.RESONANCE_API_KEY }}
+          FIELD_ENDPOINT: ${{ secrets.FIELD_ENDPOINT }}
+
+  morph-check:
+    needs: validate
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check morph readiness
+        run: |
+          node scripts/morph-check.js --report
+          
+      - name: Upload morph report
+        uses: actions/upload-artifact@v4
+        with:
+          name: morph-report
+          path: reports/morph-*.json
+          
