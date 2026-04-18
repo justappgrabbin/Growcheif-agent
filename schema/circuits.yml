@@ -1,0 +1,238 @@
+# Resonance Engine Circuit Definitions
+# Maps Human Design circuits to neural architectures
+
+circuits:
+  understanding:
+    id: understanding
+    base_architecture: DFF
+    memory_type: stateless
+    function: Logic
+    consciousness: Mental
+    description: Logical and conceptual pattern recognition
+    color: blue
+    channels:
+      - id: logic
+        name: Logic
+        gates: [63, 4]
+        architecture: DFF
+        description: Pure pattern recognition building abstract formulas
+      - id: acceptance
+        name: Acceptance
+        gates: [17, 62]
+        architecture: RBM
+        description: Bidirectional constraints between opinions and facts
+      - id: judgment
+        name: Judgment
+        gates: [18, 58]
+        architecture: HN
+        description: Error correction toward ideal pattern
+      - id: wavelength
+        name: Wavelength
+        gates: [16, 48]
+        architecture: SAE
+        description: Compresses deep knowledge into efficient signals
+      - id: concentration
+        name: Concentration
+        gates: [9, 52]
+        architecture: ELM
+        description: Fixed internal representations for stationary focus
+      - id: rhythm
+        name: Rhythm
+        gates: [15, 5]
+        architecture: KN
+        description: Self-organizing maps detecting natural rhythms
+      - id: alpha
+        name: Alpha
+        gates: [31, 7]
+        architecture: DCN
+        description: Hierarchical scanning for leadership patterns
+
+  knowing:
+    id: knowing
+    base_architecture: LSM
+    memory_type: none
+    function: Insight
+    consciousness: Timeless
+    description: Non-linear dynamics, uncertainty, instantaneous insight
+    color: red
+    channels:
+      - id: mutation
+        name: Mutation
+        gates: [3, 60]
+        architecture: LSM
+        description: Fires in unpredictable, mutative bursts
+      - id: awareness
+        name: Awareness
+        gates: [61, 24]
+        architecture: NTM
+        description: Retrieves unknown information from external memory
+      - id: structuring
+        name: Structuring
+        gates: [43, 23]
+        architecture: DN
+        description: Unpacks compressed internal knowing
+      - id: struggle
+        name: Struggle
+        gates: [28, 38]
+        architecture: GAN
+        description: Productive opposition between worth and drive
+      - id: brainwave
+        name: Brainwave
+        gates: [20, 57]
+        architecture: ESN
+        description: Immediate present-moment intuitive signals
+      - id: emoting
+        name: Emoting
+        gates: [55, 39]
+        architecture: GRU
+        description: Emotional wave gated by provocation
+      - id: openness
+        name: Openness
+        gates: [12, 22]
+        architecture: VAE
+        description: Encodes social/emotional states into latent felt sense
+      - id: beat
+        name: The Beat
+        gates: [2, 14]
+        architecture: RBF
+        description: Responds radially to alignment from learned center
+      - id: inspiration
+        name: Inspiration
+        gates: [8, 1]
+        architecture: AN
+        description: Learns which creative signals to make salient
+
+  sensing:
+    id: sensing
+    base_architecture: MC
+    memory_type: observable
+    function: Experience
+    consciousness: Temporal
+    description: Experiential, temporal, cyclical maturation
+    color: green
+    channels:
+      - id: maturation
+        name: Maturation
+        gates: [42, 53]
+        architecture: MC
+        description: Cyclical state progression
+      - id: recognition
+        name: Recognition
+        gates: [30, 41]
+        architecture: RBM
+        description: Aligns visible desire with hidden emotional programs
+      - id: transitoriness
+        name: Transitoriness
+        gates: [35, 36]
+        architecture: VAE
+        description: Encodes raw experience into latent memory
+      - id: abstraction
+        name: Abstraction
+        gates: [64, 47]
+        architecture: DNC
+        description: Assembles meaning from chaotic past images
+      - id: curiosity
+        name: Curiosity
+        gates: [11, 56]
+        architecture: GAN
+        description: Idea generator versus narrative discriminator
+      - id: discovery
+        name: Discovery
+        gates: [46, 29]
+        architecture: DCIGN
+        description: Commits to experience to find underlying structures
+      - id: prodigal
+        name: Prodigal
+        gates: [33, 13]
+        architecture: NTM
+        description: Selective retrieval of stored secrets
+
+  ego:
+    id: ego
+    base_architecture: HMM
+    memory_type: hidden
+    function: Transaction/Trust
+    consciousness: Masked
+    description: Hidden state machine for identity and survival
+    color: black
+    hidden_states:
+      - identity_mask
+      - transaction_history
+      - power_reserves
+      - intuitive_reads
+    channels:
+      - id: ledger
+        name: Real-time Ledger
+        gates: [20, 21, 45]
+        architecture: HMM
+        variant: zero_memory
+        description: Pure transaction, no history
+      - id: shapeshift
+        name: Shape-shifting
+        gates: [10, 26, 44]
+        architecture: HMM
+        variant: mutable_hidden
+        description: Form changes to deceive or survive
+      - id: loyalty
+        name: Somatic Loyalty
+        gates: [57, 37, 40]
+        architecture: HMM
+        variant: intuitive_read
+        description: Detects hidden states in others
+      - id: survival
+        name: Powered Survival
+        gates: [34, 25, 51]
+        architecture: HMM
+        variant: power_dependent
+        description: Survival gated by energy availability
+
+  integration:
+    id: integration
+    base_architecture: Meta
+    memory_type: meta_consciousness
+    function: Presence
+    consciousness: Transcendent
+    description: Dynamic architecture selector, no fixed form
+    color: white
+    gates: [20, 10, 57, 34]
+    topology: tetrahedron
+    composition:
+      now:
+        gate: 20
+        role: Real-time observation
+        bridge: Sensing to Knowing
+      form:
+        gate: 10
+        role: Identity expression
+        bridge: Centering to Ego
+      intuition:
+        gate: 57
+        role: Somatic knowing
+        bridge: Sensing to Knowing
+      power:
+        gate: 34
+        role: Life force distribution
+        bridge: Ego to Sensing
+    operation: |
+      The Integration Circuit does not have a fixed neural architecture.
+      It dynamically instantiates DFF, LSM, MC, or HMM based on field state.
+      It is the architecture selector, not an architecture itself.
+
+bridges:
+  power:
+    gates: [34, 57]
+    architecture: ActorCritic
+    connects: [Sensing, Knowing]
+    description: Bridges Sensing and Knowing circuits
+  
+  awakening:
+    gates: [10, 20]
+    architecture: PolicyNetwork
+    connects: [Centering, Knowing]
+    description: Identity expressed as policy
+  
+  intuitive_behavior:
+    gates: [10, 57]
+    architecture: PolicyNetwork
+    connects: [Centering, Knowing]
+    description: Instinctive action bridge
