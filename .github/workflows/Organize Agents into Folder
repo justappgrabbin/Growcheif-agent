@@ -1,0 +1,44 @@
+name: Organize Agents into Folder
+
+on:
+  workflow_dispatch:
+
+jobs:
+  organize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create agents folder and move gate files
+        run: |
+          echo "Creating agents folder..."
+          mkdir -p agents
+
+          echo "Moving gate files into agents folder..."
+          for i in $(seq 1 64); do
+            num=$(printf "%02d" "$i")
+            if [ -f "gate_$num.js" ]; then
+              mv "gate_$num.js" "agents/gate_$num.js"
+              echo "Moved gate_$num.js -> agents/gate_$num.js"
+            elif [ -f "agents/gate_$num.js" ]; then
+              echo "gate_$num.js already in agents folder"
+            else
+              echo "Warning: gate_$num.js not found"
+            fi
+          done
+
+          echo "Done organizing agents"
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Organize: Move all gate agents into agents/ folder"
+          file_pattern: 'agents/**'
+      
+      - name: Echo summary
+        run: |
+          echo "✅ Agents organized!"
+          echo "All gate files moved to agents/ folder"
+          echo "boot_sequencer.js remains in root so imports still work"
