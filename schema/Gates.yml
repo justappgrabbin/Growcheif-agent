@@ -1,0 +1,41 @@
+# 64 Gates of Human Design
+# Each gate maps to hexagram, center, circuit, and neural correlate
+
+gates:
+  1:
+    name: Creative
+    hexagram: 1
+    center: g_center
+    circuit: knowing
+    line_meanings: [Creative, Receptivity, Difficulty, Nourishment, Waiting, Conflict]
+    neural_correlate: attention_salience
+  
+  2:
+    name: Keeper of Keys
+    hexagram: 2
+    center: g_center
+    circuit: knowing
+    line_meanings: [Receptive, Difficulty, Nourishment, Waiting, Conflict, Peace]
+    neural_correlate: radial_alignment
+  
+  # ... gates 3-63 follow same pattern
+  
+  64:
+    name: Before Completion
+    hexagram: 64
+    center: head
+    circuit: sensing
+    line_meanings: [Completion, Beginning, Difficulty, Nourishment, Waiting, Conflict]
+    neural_correlate: pattern_completion
+
+# Gate lookup helpers
+centers:
+  head: { gates: [64, 61, 63], function: inspiration }
+  ajna: { gates: [47, 24, 4, 11], function: conceptualization }
+  throat: { gates: [56, 35, 12, 45, 33, 20], function: manifestation }
+  g_center: { gates: [1, 13, 25, 46, 10], function: identity }
+  heart: { gates: [51, 21, 40, 26], function: will }
+  spleen: { gates: [48, 18, 57, 28, 44, 50, 32, 54], function: intuition }
+  sacral: { gates: [5, 14, 29, 59, 9, 3, 42, 27, 34], function: life_force }
+  root: { gates: [38, 54, 19, 39, 41, 53, 60, 52, 58], function: stress }
+  solar_plexus: { gates: [55, 30, 22, 36, 37, 6, 49], function: emotion }
