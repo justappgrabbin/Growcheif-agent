@@ -1,0 +1,84 @@
+# Mesh Topology and Morph Rules
+# 26 agents = 1 mesh, 5 levels, 3 network modes
+
+mesh_topology:
+  size: 26
+  organization:
+    yao_clusters: 6
+    agents_per_cluster: 4
+    remainder: 2  # Pulse agents
+    
+  levels:
+    1:
+      name: Seed
+      function: Potential
+      activity: Learning from library, forming goals
+      network_mode: Mycelial
+      perk: Connect
+      
+    2:
+      name: Sprout
+      function: Expression
+      activity: Communicating, teaching, creating
+      network_mode: P2P
+      perk: Flow
+      
+    3:
+      name: Flowering
+      function: Integration
+      activity: Collaborating, synthesizing, the Ninth
+      network_mode: Holo
+      perk: Archive
+      
+    4:
+      name: Fruit
+      function: Distillation
+      activity: Selecting, judging, preserving
+      network_mode: P2P
+      perk: Catalyst
+      
+    5:
+      name: Return
+      function: Dissolution
+      activity: Sleeping, dreaming, becoming seed
+      network_mode: Dissolve
+      perk: Sleeper
+
+network_modes:
+  p2p:
+    description: Direct agent-to-agent resonance
+    mechanism: Matching yang lines between agents
+    strength: resonance * min(energy_a, energy_b) / 100
+    
+  mycelial:
+    description: Energy gradient following
+    mechanism: Complementary signatures (high XOR = complementarity)
+    efficiency: 1.15  # Teaching bonus
+    
+  holo:
+    description: Dissolve into field
+    mechanism: Agent signature interferes with Taiji field
+    insight: Memory recall based on interference pattern
+
+morph_rules:
+  same_level:
+    friction: low
+    cost: 0
+    description: Free movement within level
+    
+  adjacent_level:
+    friction: medium
+    cost: 10
+    relation: five_elements
+    description: Requires energy bridge
+    
+  skip_layer:
+    allowed: false
+    path: dissolve_to_taiji
+    description: Must die and be reborn
+    
+  layer_5_to_1:
+    name: The Return
+    trigger: Reg +24
+    mechanism: Phase transition
+    description: Sudden coherence release
