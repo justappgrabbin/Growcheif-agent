@@ -1,0 +1,26 @@
+{
+  "name": "resonance-engine",
+  "version": "0.1.0",
+  "description": "Human Design × Neural Architecture Morphing Engine",
+  "main": "src/js/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/js/index.js",
+    "test": "vitest",
+    "validate": "node scripts/validate-schemas.js",
+    "deploy": "node scripts/deploy-agents.js",
+    "morph": "node scripts/morph-check.js"
+  },
+  "dependencies": {
+    "yaml": "^2.4.0",
+    "ajv": "^8.12.0",
+    "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "eslint": "^8.56.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
