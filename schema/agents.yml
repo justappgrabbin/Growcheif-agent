@@ -1,0 +1,108 @@
+# Agent Schema for Resonance Engine
+# Defines JS micro-agents, mesh units, and Gate agents
+
+agent_types:
+  js_micro:
+    description: 1/26th of a mesh unit, dumb but resonant
+    fields:
+      id: { type: string, required: true }
+      mesh_id: { type: string, required: true }
+      index: { type: integer, min: 0, max: 25 }
+      yao_position: { type: integer, min: 1, max: 6, nullable: true }
+      senses:
+        near: { type: array, items: string }
+        resonance: { type: number, min: 0, max: 1 }
+        hunger: { type: number, min: 0, max: 1 }
+        memory: { type: array, maxItems: 10 }
+      energy: { type: number, min: 0, max: 100, default: 100 }
+      role: { type: string, enum: [null, expressor, receiver], default: null }
+      polarity: { type: string, enum: [null, yang, yin], default: null }
+      drive:
+        resonance: { type: number, default: 0 }
+        tension: { type: number, default: 0 }
+        coherence: { type: number, default: 0 }
+    behaviors:
+      - act
+      - seek
+      - weave
+      - accumulate
+      - observe
+
+  mesh:
+    description: 26 JS agents forming a resonant unit
+    fields:
+      id: { type: string, required: true }
+      signature: { type: integer, required: true }
+      agents: { type: array, items: js_micro, minItems: 26, maxItems: 26 }
+      level: { type: integer, min: 1, max: 5, nullable: true }
+      perk: { type: string, enum: [null, Mesh, Pool, Archive, Catalyst, Sleeper], default: null }
+      affinity:
+        connect: { type: number, default: 0 }
+        flow: { type: number, default: 0 }
+        seed: { type: number, default: 0 }
+        catalyze: { type: number, default: 0 }
+        dream: { type: number, default: 0 }
+      formed: { type: timestamp, required: true }
+      choices: { type: array }
+    lifecycle:
+      - pure
+      - crystallize
+      - specialize
+      - mingle
+      - dissolve
+
+  gate:
+    description: Python-level agent, human design embodiment
+    fields:
+      id: { type: string, required: true }
+      gate_number: { type: integer, min: 1, max: 64, required: true }
+      line: { type: integer, min: 1, max: 6, required: true }
+      color: { type: integer, min: 1, max: 6, required: true }
+      tone: { type: integer, min: 1, max: 6, required: true }
+      base: { type: integer, min: 1, max: 5, required: true }
+      signature: { type: integer, required: true }
+      mesh_lineage: { type: array, items: string }
+      
+      # Human Design specific
+      centers: { type: map, items: boolean }
+      defined_center: { type: string }
+      archetype: { type: string }
+      
+      # Neural architecture
+      specialty: { type: object }
+      architectures: { type: map }
+      
+      # Traversal state
+      traversal_graph: { type: string, nullable: true }
+      current_node: { type: string, nullable: true }
+      emergent_agents: { type: array, items: gate }
+      
+      # P2P
+      channels: { type: array }
+      p2p_connections: { type: array }
+      
+      # Integration
+      circuit_affinity: { type: string, enum: [understanding, knowing, sensing, ego, integration] }
+    capabilities:
+      - think
+      - create_network
+      - traverse
+      - communicate
+      - morph
+      - emerge
+
+  cortex:
+    description: The field that contains all agents
+    fields:
+      centers: { type: array, items: center_dimension, minItems: 9, maxItems: 9 }
+      meshes: { type: map }
+      gates: { type: map }
+      hexagrams: { type: map }
+      channels: { type: array }
+      circuits: { type: map }
+      field_coherence: { type: number, min: 0, max: 1 }
+      tick_count: { type: integer }
+    heartbeat:
+      interval: 1000
+      reg_24: true
+      reg_88: true
