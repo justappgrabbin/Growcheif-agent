@@ -1,0 +1,100 @@
+name: Fix and Update Resonance Engine
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix-and-run:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+      
+      - name: Update all workflows to Node 22
+        run: |
+          find .github/workflows -name "*.yml" -o -name "*.yaml" 2>/dev/null | while read file; do
+            if [ -f "$file" ]; then
+              sed -i "s/node-version: *['\"']20['\"']/node-version: '22'/g" "$file"
+              sed -i "s/node-version: 20/node-version: '22'/g" "$file"
+            fi
+          done
+          echo "Updated all workflow files to Node 22"
+      
+      - name: Create package-lock.json if missing
+        run: |
+          if [ ! -f package-lock.json ] && [ -f package.json ]; then
+            npm install --package-lock-only
+            echo "Created package-lock.json"
+          elif [ ! -f package.json ]; then
+            echo '{"name": "resonance-engine", "version": "1.0.0", "private": true}' > package.json
+            npm install --package-lock-only
+            echo "Created package.json and package-lock.json"
+          fi
+      
+      - name: Update package.json engines
+        run: |
+          if [ -f package.json ]; then
+            node -e "
+              const fs = require('fs');
+              const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+              pkg.engines = pkg.engines || {};
+              pkg.engines.node = '>=22.0.0';
+              fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+              console.log('Updated package.json engines to Node 22');
+            "
+          fi
+      
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Validate all 64 gate files exist
+        run: |
+          echo "Checking for all 64 gate agents..."
+          missing=0
+          for i in {1..64}; do
+            num=$(printf "%02d" $i)
+            if [ ! -f "agents/gate_$num.js" ]; then
+              echo "Missing: agents/gate_$num.js"
+              missing=$((missing + 1))
+            fi
+          done
+          if [ $missing -gt 0 ]; then
+            echo "Warning: $missing gate files missing"
+          else
+            echo "All 64 gate files present"
+          fi
+        continue-on-error: true
+      
+      - name: Check for common Gate 6 issues
+        run: |
+          if [ -f "agents/gate_06.js" ]; then
+            echo "Gate 6 found - checking for common issues..."
+            if grep -q "while.*true" agents/gate_06.js; then
+              echo "Warning: Gate 6 may have infinite loop"
+            fi
+            if grep -q "await.*new Promise" agents/gate_06.js; then
+              echo "Info: Gate 6 has promise - ensure it resolves"
+            fi
+          fi
+        continue-on-error: true
+      
+      - name: Commit all fixes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-fix: Update to Node 22, add package-lock, validate gates"
+          file_pattern: 'package*.json .github/workflows/*.yml .github/workflows/*.yaml'
+      
+      - name: Summary
+        run: |
+          echo "✅ Fixes applied:"
+          echo "  - Updated to Node.js 22"
+          echo "  - Created/updated package-lock.json"
+          echo "  - Updated package.json engines"
+          echo "  - Validated gate files"
