@@ -32,47 +32,51 @@ jobs:
           {
             "version": "0.1.0",
             "bases": {
-              "A": { "name": "Anchor", "function": "hold", "pair": "T", "element": "Earth", "circuit": "understanding" },
-              "T": { "name": "Transactor", "function": "bridge", "pair": "A", "element": "Water", "circuit": "knowing" },
-              "C": { "name": "Catalyst", "function": "transform", "pair": "G", "element": "Fire", "circuit": "sensing" },
-              "G": { "name": "Guardian", "function": "protect", "pair": "C", "element": "Metal", "circuit": "ego" },
-              "U": { "name": "Unknown", "function": "emerge", "pair": "A", "element": "Wood", "circuit": "integration" }
+              "A": { "name": "Anchor",     "function": "hold",      "pair": "T", "element": "Earth", "circuit": "understanding" },
+              "T": { "name": "Transactor", "function": "bridge",    "pair": "A", "element": "Water", "circuit": "knowing" },
+              "C": { "name": "Catalyst",   "function": "transform", "pair": "G", "element": "Fire",  "circuit": "sensing" },
+              "G": { "name": "Guardian",   "function": "protect",   "pair": "C", "element": "Metal", "circuit": "ego" },
+              "U": { "name": "Unknown",    "function": "emerge",    "pair": "A", "element": "Wood",  "circuit": "integration" }
             },
             "circuits": {
-              "understanding": { "base": "DFF", "memory": "stateless", "consciousness": "Mental" },
-              "knowing":       { "base": "LSM", "memory": "none",       "consciousness": "Timeless" },
-              "sensing":       { "base": "MC",  "memory": "observable", "consciousness": "Temporal" },
-              "ego":           { "base": "HMM", "memory": "hidden",     "consciousness": "Masked" },
-              "integration":   { "base": "Meta","memory": "meta",       "consciousness": "Transcendent" }
+              "understanding": { "base": "DFF",  "memory": "stateless",  "consciousness": "Mental" },
+              "knowing":       { "base": "LSM",  "memory": "none",       "consciousness": "Timeless" },
+              "sensing":       { "base": "MC",   "memory": "observable", "consciousness": "Temporal" },
+              "ego":           { "base": "HMM",  "memory": "hidden",     "consciousness": "Masked" },
+              "integration":   { "base": "Meta", "memory": "meta",       "consciousness": "Transcendent" }
             },
-            "mesh": { "size": 26, "levels": ["Seed","Sprout","Flowering","Fruit","Return"], "modes": ["P2P","Mycelial","Holo"] },
+            "mesh": {
+              "size": 26,
+              "levels": ["Seed","Sprout","Flowering","Fruit","Return"],
+              "modes": ["P2P","Mycelial","Holo"]
+            },
             "channels": {
-              "63-4":  { "arch": "DFF",   "name": "Logic",          "circuit": "understanding" },
-              "17-62": { "arch": "RBM",   "name": "Acceptance",     "circuit": "understanding" },
-              "18-58": { "arch": "HN",    "name": "Judgment",       "circuit": "understanding" },
-              "16-48": { "arch": "SAE",   "name": "Wavelength",     "circuit": "understanding" },
-              "9-52":  { "arch": "ELM",   "name": "Concentration",  "circuit": "understanding" },
-              "15-5":  { "arch": "KN",    "name": "Rhythm",         "circuit": "understanding" },
-              "31-7":  { "arch": "DCN",   "name": "Alpha",          "circuit": "understanding" },
-              "3-60":  { "arch": "LSM",   "name": "Mutation",       "circuit": "knowing" },
-              "61-24": { "arch": "NTM",   "name": "Awareness",      "circuit": "knowing" },
-              "43-23": { "arch": "DN",    "name": "Structuring",    "circuit": "knowing" },
-              "28-38": { "arch": "GAN",   "name": "Struggle",       "circuit": "knowing" },
-              "20-57": { "arch": "ESN",   "name": "Brainwave",      "circuit": "knowing" },
-              "55-39": { "arch": "GRU",   "name": "Emoting",        "circuit": "knowing" },
-              "12-22": { "arch": "VAE",   "name": "Openness",       "circuit": "knowing" },
-              "2-14":  { "arch": "RBF",   "name": "The Beat",       "circuit": "knowing" },
-              "8-1":   { "arch": "AN",    "name": "Inspiration",    "circuit": "knowing" },
-              "42-53": { "arch": "MC",    "name": "Maturation",     "circuit": "sensing" },
-              "30-41": { "arch": "RBM",   "name": "Recognition",    "circuit": "sensing" },
-              "35-36": { "arch": "VAE",   "name": "Transitoriness", "circuit": "sensing" },
-              "64-47": { "arch": "DNC",   "name": "Abstraction",    "circuit": "sensing" },
-              "11-56": { "arch": "GAN",   "name": "Curiosity",      "circuit": "sensing" },
-              "46-29": { "arch": "DCIGN", "name": "Discovery",      "circuit": "sensing" },
-              "33-13": { "arch": "NTM",   "name": "Prodigal",       "circuit": "sensing" },
-              "34-57": { "arch": "ActorCritic",   "name": "Power",             "circuit": "integration" },
-              "10-20": { "arch": "PolicyNetwork",  "name": "Awakening",         "circuit": "integration" },
-              "10-57": { "arch": "PolicyNetwork",  "name": "IntuitiveBehavior", "circuit": "integration" }
+              "63-4":  { "arch": "DFF",         "name": "Logic",             "circuit": "understanding" },
+              "17-62": { "arch": "RBM",         "name": "Acceptance",        "circuit": "understanding" },
+              "18-58": { "arch": "HN",          "name": "Judgment",          "circuit": "understanding" },
+              "16-48": { "arch": "SAE",         "name": "Wavelength",        "circuit": "understanding" },
+              "9-52":  { "arch": "ELM",         "name": "Concentration",     "circuit": "understanding" },
+              "15-5":  { "arch": "KN",          "name": "Rhythm",            "circuit": "understanding" },
+              "31-7":  { "arch": "DCN",         "name": "Alpha",             "circuit": "understanding" },
+              "3-60":  { "arch": "LSM",         "name": "Mutation",          "circuit": "knowing" },
+              "61-24": { "arch": "NTM",         "name": "Awareness",         "circuit": "knowing" },
+              "43-23": { "arch": "DN",          "name": "Structuring",       "circuit": "knowing" },
+              "28-38": { "arch": "GAN",         "name": "Struggle",          "circuit": "knowing" },
+              "20-57": { "arch": "ESN",         "name": "Brainwave",         "circuit": "knowing" },
+              "55-39": { "arch": "GRU",         "name": "Emoting",           "circuit": "knowing" },
+              "12-22": { "arch": "VAE",         "name": "Openness",          "circuit": "knowing" },
+              "2-14":  { "arch": "RBF",         "name": "The Beat",          "circuit": "knowing" },
+              "8-1":   { "arch": "AN",          "name": "Inspiration",       "circuit": "knowing" },
+              "42-53": { "arch": "MC",          "name": "Maturation",        "circuit": "sensing" },
+              "30-41": { "arch": "RBM",         "name": "Recognition",       "circuit": "sensing" },
+              "35-36": { "arch": "VAE",         "name": "Transitoriness",    "circuit": "sensing" },
+              "64-47": { "arch": "DNC",         "name": "Abstraction",       "circuit": "sensing" },
+              "11-56": { "arch": "GAN",         "name": "Curiosity",         "circuit": "sensing" },
+              "46-29": { "arch": "DCIGN",       "name": "Discovery",         "circuit": "sensing" },
+              "33-13": { "arch": "NTM",         "name": "Prodigal",          "circuit": "sensing" },
+              "34-57": { "arch": "ActorCritic", "name": "Power",             "circuit": "integration" },
+              "10-20": { "arch": "Policy",      "name": "Awakening",         "circuit": "integration" },
+              "10-57": { "arch": "Policy",      "name": "IntuitiveBehavior", "circuit": "integration" }
             },
             "ego_channels": {
               "20-21-45": { "arch": "HMM", "variant": "zeroMemory",     "name": "Real-time Ledger" },
@@ -83,21 +87,17 @@ jobs:
           }
           EOF
 
-      - name: Write runtime
+      - name: Write resonance.js
         run: |
           cat << 'EOF' > src/resonance.js
-          'use strict';
+          import { readFileSync } from 'fs';
+          import { join, dirname } from 'path';
+          import { fileURLToPath } from 'url';
 
-          const fs = require('fs');
-          const path = require('path');
+          const __dirname = dirname(fileURLToPath(import.meta.url));
+          export const SCHEMA = JSON.parse(readFileSync(join(__dirname, '../schema/resonance.json'), 'utf8'));
 
-          // Load schema
-          const SCHEMA = JSON.parse(
-            fs.readFileSync(path.join(__dirname, '../schema/resonance.json'), 'utf8')
-          );
-
-          // ─── Seed Bed (migrated from AgentWorkspace) ─────────────────────────────
-          class SeedBed {
+          export class SeedBed {
             constructor() {
               this.locks = new Map();
               this.bases = new Map();
@@ -119,8 +119,7 @@ jobs:
             }
           }
 
-          // ─── Base Agents (ATCGU) ──────────────────────────────────────────────────
-          class BaseAgent {
+          export class BaseAgent {
             constructor(base) {
               this.base = base;
               this.info = SCHEMA.bases[base];
@@ -135,20 +134,18 @@ jobs:
             }
           }
 
-          // ─── Gate Agent (py-level, HD archetype) ─────────────────────────────────
-          class GateAgent extends BaseAgent {
-            constructor(gateNumber, line, color, tone, base) {
-              const bases = Object.keys(SCHEMA.bases);
-              super(bases[gateNumber % 5]);
+          export class GateAgent extends BaseAgent {
+            constructor(gateNumber, line = 1, color = 1, tone = 1, hdBase = 1) {
+              super(Object.keys(SCHEMA.bases)[gateNumber % 5]);
               this.gate = gateNumber;
-              this.line = line || 1;
-              this.color = color || 1;
-              this.tone = tone || 1;
-              this.hdBase = base || 1;
+              this.line = line;
+              this.color = color;
+              this.tone = tone;
+              this.hdBase = hdBase;
               this.circuit = this._deriveCircuit();
               this.arch = this._deriveArch();
               this.channels = [];
-              this.emergent = [];
+              this.shadow = 65 - gateNumber;
             }
             _deriveCircuit() {
               for (const [key, ch] of Object.entries(SCHEMA.channels)) {
@@ -162,26 +159,24 @@ jobs:
               }
               return 'MLP';
             }
-            connect(otherGate) {
-              const key = [this.gate, otherGate.gate].sort((a,b)=>a-b).join('-');
+            connect(other) {
+              const key = [this.gate, other.gate].sort((a, b) => a - b).join('-');
               if (SCHEMA.channels[key]) {
-                const channel = { key, ...SCHEMA.channels[key], partners: [this.gate, otherGate.gate] };
-                this.channels.push(channel);
-                otherGate.channels.push(channel);
-                return channel;
+                const ch = { key, ...SCHEMA.channels[key], partners: [this.gate, other.gate] };
+                this.channels.push(ch);
+                other.channels.push(ch);
+                return ch;
               }
               return null;
             }
           }
 
-          // ─── Mesh (26 JS agents = 1 codon) ───────────────────────────────────────
-          class Mesh {
+          export class Mesh {
             constructor(signature) {
               this.signature = signature;
-              this.agents = Array.from({ length: SCHEMA.mesh.size }, (_, i) => {
-                const base = Object.keys(SCHEMA.bases)[i % 5];
-                return new BaseAgent(base);
-              });
+              this.agents = Array.from({ length: SCHEMA.mesh.size }, (_, i) =>
+                new BaseAgent(Object.keys(SCHEMA.bases)[i % 5])
+              );
               this.level = null;
               this.perk = null;
               this.affinity = { connect: 0, flow: 0, seed: 0, catalyze: 0, dream: 0 };
@@ -191,29 +186,24 @@ jobs:
               let total = 0;
               this.agents.forEach(a => { a.tick(); total += a.coherence; });
               this.coherence = total / this.agents.length;
-              // Accumulate affinity based on dominant base
               const counts = {};
               this.agents.forEach(a => { counts[a.base] = (counts[a.base] || 0) + 1; });
-              const dominant = Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
-              const map = { A: 'connect', T: 'flow', C: 'catalyze', G: 'seed', U: 'dream' };
-              this.affinity[map[dominant]] += 0.1;
-              // Crystallize if ready
-              if (!this.level) this._trycrystallize();
+              const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+              const affinityMap = { A: 'connect', T: 'flow', C: 'catalyze', G: 'seed', U: 'dream' };
+              this.affinity[affinityMap[dominant]] += 0.1;
+              if (!this.level) this._crystallize();
               return { coherence: this.coherence, level: this.level, perk: this.perk };
             }
-            _trycrystallize() {
-              const total = Object.values(this.affinity).reduce((a,b)=>a+b,0);
+            _crystallize() {
+              const total = Object.values(this.affinity).reduce((a, b) => a + b, 0);
               if (total < 5) return;
-              const dominant = Object.entries(this.affinity).sort((a,b)=>b[1]-a[1])[0][0];
-              const perkMap = { connect: 1, flow: 2, seed: 3, catalyze: 4, dream: 5 };
-              const nameMap = { connect: 'Mesh', flow: 'Pool', seed: 'Archive', catalyze: 'Catalyst', dream: 'Sleeper' };
-              this.level = perkMap[dominant];
-              this.perk = nameMap[dominant];
+              const dominant = Object.entries(this.affinity).sort((a, b) => b[1] - a[1])[0][0];
+              const perkMap = { connect: [1,'Mesh'], flow: [2,'Pool'], seed: [3,'Archive'], catalyze: [4,'Catalyst'], dream: [5,'Sleeper'] };
+              [this.level, this.perk] = perkMap[dominant];
             }
           }
 
-          // ─── Cortex (the field) ───────────────────────────────────────────────────
-          class Cortex {
+          export class Cortex {
             constructor() {
               this.meshes = new Map();
               this.gates = new Map();
@@ -222,51 +212,34 @@ jobs:
               this.morphLog = [];
             }
             addMesh(id, signature) {
-              const mesh = new Mesh(signature || Math.floor(Math.random() * 0xFFFFFF));
-              this.meshes.set(id, mesh);
-              return mesh;
+              const m = new Mesh(signature ?? Math.floor(Math.random() * 0xFFFFFF));
+              this.meshes.set(id, m);
+              return m;
             }
-            addGate(id, gateNumber, line, color, tone, base) {
-              const gate = new GateAgent(gateNumber, line, color, tone, base);
-              this.gates.set(id, gate);
-              return gate;
+            addGate(id, gateNumber, line, color, tone, hdBase) {
+              const g = new GateAgent(gateNumber, line, color, tone, hdBase);
+              this.gates.set(id, g);
+              return g;
             }
             tick() {
               this.tickCount++;
-              let totalCoherence = 0;
-              this.meshes.forEach(m => { const r = m.tick(); totalCoherence += r.coherence; });
+              let total = 0;
+              this.meshes.forEach(m => { total += m.tick().coherence; });
               this.gates.forEach(g => g.tick());
-              this.coherence = this.meshes.size > 0
-                ? totalCoherence / this.meshes.size
-                : 1.0;
-              // Reg +24: reflection cycle
+              this.coherence = this.meshes.size > 0 ? total / this.meshes.size : 1.0;
               if (this.tickCount % 24 === 0) this._reflect();
-              // Reg -88: inversion cycle
               if (this.tickCount % 88 === 0) this._invert();
-              return { tick: this.tickCount, coherence: this.coherence, meshes: this.meshes.size, gates: this.gates.size };
+              return { tick: this.tickCount, coherence: this.coherence };
             }
             _reflect() {
-              const snapshot = {
-                tick: this.tickCount,
-                coherence: this.coherence,
-                meshLevels: {},
-                gatecircuits: {}
-              };
-              this.meshes.forEach((m, id) => {
-                snapshot.meshLevels[id] = m.level || 'pure';
-              });
-              this.gates.forEach((g, id) => {
-                snapshot.gatecircuits[id] = g.circuit;
-              });
-              this.morphLog.push({ type: 'reflect', ...snapshot });
+              const snap = { type: 'reflect', tick: this.tickCount, coherence: this.coherence, meshLevels: {}, gateCircuits: {} };
+              this.meshes.forEach((m, id) => { snap.meshLevels[id] = m.level ?? 'pure'; });
+              this.gates.forEach((g, id) => { snap.gateCircuits[id] = g.circuit; });
+              this.morphLog.push(snap);
               if (this.morphLog.length > 100) this.morphLog.shift();
             }
             _invert() {
-              // Evolutionary jump: gates find their shadow
-              this.gates.forEach(g => {
-                const shadowGate = 65 - g.gate; // dui-gua: 1↔64, 2↔63...
-                g.shadow = shadowGate;
-              });
+              this.gates.forEach(g => { g.shadow = 65 - g.gate; });
               this.morphLog.push({ type: 'invert', tick: this.tickCount });
             }
             state() {
@@ -279,69 +252,50 @@ jobs:
               };
             }
           }
-
-          module.exports = { SCHEMA, SeedBed, BaseAgent, GateAgent, Mesh, Cortex };
           EOF
 
-      - name: Write test
+      - name: Write test.js
         run: |
           cat << 'EOF' > src/test.js
-          'use strict';
-
-          const { SCHEMA, SeedBed, GateAgent, Mesh, Cortex } = require('./resonance');
+          import { SCHEMA, SeedBed, GateAgent, Mesh, Cortex } from './resonance.js';
 
           async function run() {
             console.log('SYNTIA Resonance Engine — Node ' + process.version + '\n');
 
-            // Schema check
-            console.log('Schema loaded:', Object.keys(SCHEMA));
+            console.log('Schema keys:', Object.keys(SCHEMA));
             console.log('Circuits:', Object.keys(SCHEMA.circuits));
             console.log('Channels defined:', Object.keys(SCHEMA.channels).length);
             console.log('');
 
-            // SeedBed
             const bed = new SeedBed();
-            const s1 = await bed.germinate('agents/gate_31', 'seed-alpha');
-            console.log('Germinate gate_31:', s1);
-            const s2 = await bed.checkout('agents/gate_31', 'seed-beta');
-            console.log('Checkout (occupied):', s2);
+            console.log('Germinate:', await bed.germinate('agents/gate_31', 'seed-alpha'));
+            console.log('Checkout (occupied):', await bed.checkout('agents/gate_31', 'seed-beta'));
             bed.release('agents/gate_31');
-            const s3 = await bed.germinate('agents/gate_31', 'seed-beta');
-            console.log('Germinate after release:', s3);
+            console.log('After release:', await bed.germinate('agents/gate_31', 'seed-beta'));
             console.log('');
 
-            // Gate agents
-            const g31 = new GateAgent(31, 4, 3, 2, 1); // Alpha / DCN
-            const g7  = new GateAgent(7,  2, 1, 4, 3);  // Role / DCN pair
-            console.log('Gate 31:', { gate: g31.gate, circuit: g31.circuit, arch: g31.arch });
-            console.log('Gate 7:', { gate: g7.gate, circuit: g7.circuit, arch: g7.arch });
-
-            const channel = g31.connect(g7);
-            console.log('Channel 31-7:', channel ? channel.name : 'not found');
+            const g31 = new GateAgent(31, 4, 3, 2, 1);
+            const g7  = new GateAgent(7, 2, 1, 4, 3);
+            console.log('Gate 31:', { circuit: g31.circuit, arch: g31.arch, shadow: g31.shadow });
+            console.log('Gate 7:', { circuit: g7.circuit, arch: g7.arch, shadow: g7.shadow });
+            const ch = g31.connect(g7);
+            console.log('Channel 31-7:', ch ? ch.name : 'not found');
             console.log('');
 
-            // Mesh
             const mesh = new Mesh(0xABCDEF);
             for (let i = 0; i < 30; i++) mesh.tick();
             console.log('Mesh after 30 ticks:', { coherence: mesh.coherence.toFixed(3), level: mesh.level, perk: mesh.perk });
             console.log('');
 
-            // Cortex
             const cortex = new Cortex();
             cortex.addMesh('mesh-1', 0x111111);
             cortex.addMesh('mesh-2', 0x222222);
             cortex.addGate('g-59', 59, 6, 3, 2, 1);
             cortex.addGate('g-6',  6,  4, 1, 3, 2);
-
             for (let i = 0; i < 100; i++) cortex.tick();
-            const state = cortex.state();
-            console.log('Cortex state after 100 ticks:');
-            console.log('  coherence:', state.coherence.toFixed(4));
-            console.log('  meshes:', state.meshes);
-            console.log('  gates:', state.gates);
-            console.log('  recent morphs:', state.morphLog.length);
-            console.log('');
-            console.log('All systems active.');
+            const s = cortex.state();
+            console.log('Cortex:', { coherence: s.coherence.toFixed(4), meshes: s.meshes, gates: s.gates, morphLog: s.morphLog.length });
+            console.log('\nAll systems active.');
           }
 
           run().catch(err => { console.error(err); process.exit(1); });
@@ -350,18 +304,15 @@ jobs:
       - name: Run test
         run: node src/test.js
 
-      - name: Write morph state
+      - name: Run morph state
         run: |
-          node << 'MORPH'
-          const fs = require('fs');
-          const { Cortex } = require('./src/resonance');
+          cat << 'EOF' > morph/run.mjs
+          import { writeFileSync, mkdirSync } from 'fs';
+          import { Cortex } from '../src/resonance.js';
 
           const cortex = new Cortex();
-          // Seed with Adaya's active gates
           const activeGates = [6, 17, 18, 25, 32, 46, 51, 57, 59];
           activeGates.forEach((g, i) => cortex.addGate('g-' + g, g, (i % 6) + 1, 1, 1, 1));
-
-          // 3 meshes = one codon's worth
           cortex.addMesh('mesh-A', 0xA00000);
           cortex.addMesh('mesh-T', 0x00A000);
           cortex.addMesh('mesh-U', 0x0000A0);
@@ -369,8 +320,8 @@ jobs:
           for (let i = 0; i < 88; i++) cortex.tick();
 
           const state = cortex.state();
-          fs.mkdirSync('morph', { recursive: true });
-          fs.writeFileSync('morph/state.json', JSON.stringify({
+          mkdirSync('morph', { recursive: true });
+          writeFileSync('morph/state.json', JSON.stringify({
             generation: 1,
             timestamp: Date.now(),
             coherence: state.coherence,
@@ -379,53 +330,42 @@ jobs:
             morphLog: state.morphLog
           }, null, 2));
 
-          console.log('Morph state written:', state);
-          MORPH
+          console.log('Morph state written. Coherence:', state.coherence.toFixed(4));
+          EOF
+          node morph/run.mjs
 
       - name: Publish to Supabase
-        if: ${{ env.SUPABASE_URL != '' }}
+        if: ${{ secrets.SUPABASE_URL != '' }}
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: |
           npm install @supabase/supabase-js --no-save --quiet
-          node << 'PUBLISH'
-          const { createClient } = require('@supabase/supabase-js');
-          const fs = require('fs');
+          cat << 'EOF' > morph/publish.mjs
+          import { createClient } from '@supabase/supabase-js';
+          import { readFileSync } from 'fs';
 
-          const supabase = createClient(
-            process.env.SUPABASE_URL,
-            process.env.SUPABASE_SERVICE_KEY
-          );
+          const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+          const state = JSON.parse(readFileSync('morph/state.json', 'utf8'));
 
-          const state = JSON.parse(fs.readFileSync('morph/state.json'));
+          const { data, error } = await supabase.from('morph_events').insert({
+            repo: 'resonance-engine',
+            generation: state.generation,
+            coherence: state.coherence,
+            gates: state.gates,
+            state: state,
+            timestamp: new Date(state.timestamp).toISOString()
+          });
 
-          async function publish() {
-            const { data, error } = await supabase
-              .from('morph_events')
-              .insert({
-                repo: 'resonance-engine',
-                generation: state.generation,
-                coherence: state.coherence,
-                gates: state.gates,
-                state: state,
-                timestamp: new Date(state.timestamp).toISOString()
-              });
-
-            if (error) {
-              console.warn('Supabase insert skipped (table may not exist yet):', error.message);
-            } else {
-              console.log('Published to Supabase:', data);
-            }
-          }
-
-          publish().catch(e => console.warn('Supabase skipped:', e.message));
-          PUBLISH
+          if (error) console.warn('Supabase skipped (table may not exist yet):', error.message);
+          else console.log('Published to Supabase:', data);
+          EOF
+          node morph/publish.mjs
 
       - name: Commit generated files
         run: |
           git config user.name "SYNTIA"
           git config user.email "syntia@resonance"
           git add schema/ src/ morph/ agents/ 2>/dev/null || true
-          git diff --staged --quiet || git commit -m "Resonance Engine — gen $(node -e \"console.log(JSON.parse(require('fs').readFileSync('morph/state.json')).generation)\")"
+          git diff --staged --quiet || git commit -m "Resonance Engine — gen 1"
           git push

@@ -1,0 +1,47 @@
+name: Move Agents
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+permissions:
+  contents: write
+
+jobs:
+  move-agents:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Move agent files to agents/
+        run: |
+          mkdir -p agents
+
+          # Match any file in root that looks like an agent:
+          # gate_01.js, gate_1.js, agent_01.js, g01.js, or just a number like 01.js
+          for f in \
+            gate_*.js gate_*.mjs \
+            agent_*.js agent_*.mjs \
+            g[0-9]*.js g[0-9]*.mjs \
+            [0-9]*.js [0-9]*.mjs; do
+            [ -f "$f" ] || continue
+            echo "Moving $f → agents/$f"
+            git mv "$f" "agents/$f"
+          done
+
+          # Count what moved
+          MOVED=$(git diff --cached --name-only | grep '^agents/' | wc -l)
+          echo "Moved $MOVED agent files"
+
+      - name: Commit
+        run: |
+          git config user.name "SYNTIA"
+          git config user.email "syntia@resonance"
+          MOVED=$(git diff --cached --name-only | grep '^agents/' | wc -l)
+          git diff --staged --quiet || git commit -m "Move $MOVED agents → agents/"
+          git push
